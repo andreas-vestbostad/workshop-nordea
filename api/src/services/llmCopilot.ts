@@ -4,8 +4,12 @@
 // model. Instead of calling the portfolio/risk/insights services directly,
 // it connects to the MCP server in /mcp-server as an MCP client and hands
 // Claude that server's tools - the same tools an external MCP client (e.g.
-// Claude Desktop) would get. Claude decides which tools to call, with which
-// arguments, and synthesizes the final answer.
+// Claude Desktop) would get - plus Anthropic's built-in web search tool for
+// general market/financial context the synthetic dataset doesn't have.
+// Claude decides which tools to call, with which arguments, and
+// synthesizes the final answer. Web search is executed server-side by
+// Anthropic (it never goes through callTool below), so it needs no client
+// handling beyond being listed in `tools`.
 //
 // Requires ANTHROPIC_API_KEY (see /.env.example). The route in
 // routes/customers.ts falls back to `deterministicCopilot` if this engine
@@ -25,10 +29,20 @@ const MCP_SERVER_DIR = path.join(__dirname, '..', '..', '..', 'mcp-server')
 
 const MODEL = process.env.ANTHROPIC_MODEL ?? 'claude-sonnet-5'
 const MAX_TOOL_ROUNDS = 6
+const MAX_WEB_SEARCHES_PER_REQUEST = 3
+
+// Anthropic's built-in web search tool: executed server-side by Anthropic,
+// not by this process - see https://docs.claude.com/en/docs/agents-and-tools/tool-use/web-search-tool
+const WEB_SEARCH_TOOL: Anthropic.ToolUnion = {
+  type: 'web_search_20250305',
+  name: 'web_search',
+  max_uses: MAX_WEB_SEARCHES_PER_REQUEST,
+}
 
 const SYSTEM_PROMPT = `You are Wealth Copilot, an assistant for a fictional bank's Private Banking customers.
 You are currently assisting customer "{customerId}". Whenever a tool takes a "customerId" argument, always pass exactly "{customerId}" - never ask the user for it or guess another one.
-Use the provided tools to look up the customer's real data before answering; never invent numbers.
+Use the customer-data tools to look up the customer's real accounts, portfolio, risk and insights before answering; never invent numbers.
+You also have a web_search tool. Use it only for general, non-personal context (e.g. "what is a bond", broad market/news background) that the customer-data tools can't provide - never to look up anything about this specific fictional customer. When your answer relies on a web search, briefly note that part is based on external, real-world information, separate from the synthetic demo data.
 Keep answers short (2-4 sentences) and in plain language, avoiding financial jargon.
 All data is synthetic/fictional and this is an educational demo, not real investment advice - say so only when directly relevant (e.g. questions about risk or recommendations).`
 
@@ -76,11 +90,12 @@ export const llmCopilot: CopilotEngine = {
     const anthropic = new Anthropic({ apiKey })
     const client = await getMcpClient()
     const { tools } = await client.listTools()
-    const anthropicTools: Anthropic.Tool[] = tools.map((tool) => ({
+    const mcpTools: Anthropic.ToolUnion[] = tools.map((tool) => ({
       name: tool.name,
       description: tool.description ?? '',
       input_schema: tool.inputSchema as Anthropic.Tool.InputSchema,
     }))
+    const anthropicTools: Anthropic.ToolUnion[] = [...mcpTools, WEB_SEARCH_TOOL]
 
     const system = SYSTEM_PROMPT.replaceAll('{customerId}', customerId)
     const messages: Anthropic.MessageParam[] = [{ role: 'user', content: message }]
