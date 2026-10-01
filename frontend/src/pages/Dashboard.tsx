@@ -85,7 +85,7 @@ export default function Dashboard() {
 
       <section className="panel">
         <h3>Portfolio performance</h3>
-        <PerformanceChart series={performance.series} />
+        <PerformanceChart key={selectedCustomerId} series={performance.series} allocationByGeography={portfolio.allocation_by_geography} />
       </section>
     </div>
   )
