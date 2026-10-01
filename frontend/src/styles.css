@@ -491,3 +491,10 @@ body {
 .benchmark-legend > span { display: inline-flex; align-items: center; gap: 6px; }
 .benchmark-period { margin-top: 12px; }
 .benchmark-note { margin: 8px 0 0; color: var(--color-text-muted); font-size: 0.75rem; line-height: 1.6; max-width: 85ch; }
+
+.benchmark-button-label { display: flex; flex-direction: column; align-items: flex-start; gap: 3px; }
+.benchmark-button-label small { font-size: 0.7rem; color: var(--color-text-muted); font-weight: 400; }
+.benchmark-reasons { margin-bottom: 14px; padding: 0 12px; border-left: 3px solid #bfdbfe; }
+.benchmark-reasons p { font-size: 0.8rem; line-height: 1.6; color: var(--color-text-muted); margin: 8px 0; }
+.benchmark-reasons strong { color: var(--color-text); }
+.benchmark-reasons a { color: var(--color-primary); }
