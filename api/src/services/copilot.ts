@@ -17,7 +17,7 @@ export interface CopilotReply {
 }
 
 export interface CopilotEngine {
-  answer(customerId: string, message: string): CopilotReply
+  answer(customerId: string, message: string): Promise<CopilotReply>
 }
 
 type IntentHandler = (customerId: string) => string
@@ -87,7 +87,7 @@ function fallbackAnswer(customerId: string): string {
 }
 
 export const deterministicCopilot: CopilotEngine = {
-  answer(customerId, message) {
+  async answer(customerId, message) {
     const customer = getCustomer(customerId)
     if (!customer) {
       return { answer: 'Unknown customer.', matched_intent: 'error' }

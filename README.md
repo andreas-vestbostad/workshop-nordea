@@ -94,9 +94,13 @@ POST /customers/:customerId/copilot
 ```
 
 Copilot-endepunktet tar imot `{ "message": "Hvordan har porteføljen min utviklet seg?" }`.
-Det bruker deterministisk intensjonsgjenkjenning og beregninger i dag. Tjenestegrensesnittet
-er bevisst isolert slik at en senere workshopoppgave kan legge til en LLM eller et
-gjenfinningslag uten å endre frontend-kontrakten.
+Som standard bruker det deterministisk intensjonsgjenkjenning og beregninger, uten behov for
+en ekstern AI-nøkkel. Sett `ANTHROPIC_API_KEY` i en `.env`-fil i repo-roten (se
+`.env.example`) for å slå på en LLM-drevet variant: da svarer Claude i stedet, og henter
+kundens data ved å kalle MCP-serveren i `/mcp-server` som verktøy. Feiler LLM-kallet, eller
+mangler nøkkelen, faller API-et automatisk tilbake til det deterministiske svaret - kontrakten
+mot frontend er uendret uansett motor. Se `api/src/services/copilot.ts` (deterministisk) og
+`api/src/services/llmCopilot.ts` (LLM + MCP).
 
 ## Datamodeller i API-et
 
