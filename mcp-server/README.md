@@ -20,6 +20,7 @@ frontend.
 | `get_investments` | `GET /customers/:id/investments` |
 | `get_portfolio` | `GET /customers/:id/portfolio` |
 | `get_performance` | `GET /customers/:id/performance` |
+| `get_performance_explanation` | `GET /customers/:id/performance/explanation` |
 | `get_risk` | `GET /customers/:id/risk` |
 | `get_insights` | `GET /customers/:id/insights` |
 | `ask_copilot` | `POST /customers/:id/copilot` |

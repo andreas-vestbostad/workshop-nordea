@@ -122,6 +122,19 @@ server.tool(
 )
 
 server.tool(
+  'get_performance_explanation',
+  "Explain why a customer's portfolio value changed: per-holding contributions (percentage points, summing to the total return), a comparison with a simple reference mix for their risk profile (market effect vs. effect of what they hold), whether the return is below/within/above a typical range for the profile, a plain-language summary, limitations and data warnings. Use this for \"why did my portfolio change?\" questions. Never invent numbers beyond this data, and always mention the limitations.",
+  customerIdShape,
+  async ({ customerId }) => {
+    try {
+      return jsonResult(await api.getPerformanceExplanation(customerId))
+    } catch (error) {
+      return errorResult(error)
+    }
+  },
+)
+
+server.tool(
   'get_risk',
   "Get a customer's illustrative demo risk score and category, and whether it aligns with their stated risk profile. Educational model only, not a real suitability assessment.",
   customerIdShape,
