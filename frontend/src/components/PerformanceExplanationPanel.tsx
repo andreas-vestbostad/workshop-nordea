@@ -62,11 +62,11 @@ export default function PerformanceExplanationPanel({ customerId }: { customerId
 
       {data.period && (
         <div className="stat-grid">
-          <StatCard label="Your return" value={formatPercentage(data.return_pct)} sublabel={`${data.period.days} days`}
+          <StatCard label="Your return" value={formatPercentage(data.return_pct, 1)} sublabel={`${data.period.days} days`}
             tone={data.return_pct >= 0 ? 'positive' : 'negative'} />
           {data.reference && (
             <>
-              <StatCard label="Market (reference mix)" value={formatPercentage(data.reference.return_pct)} sublabel={data.reference.label} />
+              <StatCard label="Market (reference mix)" value={formatPercentage(data.reference.return_pct, 1)} sublabel={data.reference.label} />
               <StatCard label="Effect of your choices" value={formatPoints(data.reference.choices_effect_pct_points)}
                 sublabel="Your return minus the reference mix" tone={data.reference.choices_effect_pct_points >= 0 ? 'positive' : 'negative'} />
             </>
@@ -84,8 +84,8 @@ export default function PerformanceExplanationPanel({ customerId }: { customerId
           <span className={`expectation-badge expectation-badge--${data.expectation.verdict}`}>
             {VERDICT_LABEL[data.expectation.verdict]}
           </span>{' '}
-          Typical for {data.expectation.risk_profile}: {formatPercentage(data.expectation.typical_low_pct)} to{' '}
-          {formatPercentage(data.expectation.typical_high_pct)}
+          Typical for {data.expectation.risk_profile}: {formatPercentage(data.expectation.typical_low_pct, 1)} to{' '}
+          {formatPercentage(data.expectation.typical_high_pct, 1)}
         </p>
       )}
 

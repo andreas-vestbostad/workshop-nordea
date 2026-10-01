@@ -20,6 +20,11 @@ describe('formatPercentage', () => {
   it('keeps the minus sign for negative values', () => {
     expect(formatPercentage(-3.1)).toBe('-3.1%')
   })
+
+  it('rounds to a fixed number of decimals when asked', () => {
+    expect(formatPercentage(4.87, 1)).toBe('+4.9%')
+    expect(formatPercentage(-3.72, 1)).toBe('-3.7%')
+  })
 })
 
 describe('formatPoints', () => {
