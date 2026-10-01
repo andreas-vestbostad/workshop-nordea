@@ -45,7 +45,7 @@ export default function Portfolio() {
 
       <section className="panel">
         <h3>Performance</h3>
-        <PerformanceChart series={performance.series} />
+        <PerformanceChart key={selectedCustomerId} series={performance.series} allocationByGeography={portfolio.allocation_by_geography} />
       </section>
 
       {selectedCustomerId && <PerformanceExplanationPanel customerId={selectedCustomerId} />}
