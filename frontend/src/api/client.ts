@@ -9,6 +9,7 @@ import type {
   CopilotReply,
   InsightsSummary,
   Investment,
+  PerformanceExplanation,
   PerformanceSummary,
   PortfolioSummary,
   RiskSummary,
@@ -55,6 +56,10 @@ export async function fetchPortfolio(customerId: string): Promise<PortfolioSumma
 
 export async function fetchPerformance(customerId: string): Promise<PerformanceSummary> {
   return getJson(`/customers/${customerId}/performance`)
+}
+
+export async function fetchPerformanceExplanation(customerId: string): Promise<PerformanceExplanation> {
+  return getJson(`/customers/${customerId}/performance/explanation`)
 }
 
 export async function fetchRisk(customerId: string): Promise<RiskSummary> {

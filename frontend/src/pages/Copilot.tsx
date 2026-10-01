@@ -9,6 +9,7 @@ interface ChatMessage {
 
 const SUGGESTED_QUESTIONS = [
   'How has my portfolio performed?',
+  'Why did my portfolio change?',
   'Why has my risk increased?',
   'Am I diversified?',
   'How much am I saving every month?',

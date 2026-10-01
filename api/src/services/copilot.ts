@@ -7,6 +7,7 @@
 // later without changing the route or frontend contract.
 import { calculatePortfolio, calculatePerformance } from './portfolio.js'
 import { calculateRisk } from './risk.js'
+import { explainPerformance } from './performanceExplanation.js'
 import { calculateMonthlySavings, generateInsights } from './insights.js'
 import { getCustomer } from '../data.js'
 
@@ -22,6 +23,11 @@ export interface CopilotEngine {
 type IntentHandler = (customerId: string) => string
 
 const INTENTS: { id: string; patterns: RegExp[]; handle: IntentHandler }[] = [
+  {
+    id: 'performance-explanation',
+    patterns: [/why.*(portfolio|investments|value)/i, /what.*(drove|driving|caused)/i, /explain.*(performance|portfolio|development)/i],
+    handle: (customerId) => explainPerformance(customerId).summary.join(' '),
+  },
   {
     id: 'performance',
     patterns: [/perform/i, /how.*(doing|done)/i, /return/i],

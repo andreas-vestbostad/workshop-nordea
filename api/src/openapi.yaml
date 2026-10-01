@@ -223,6 +223,27 @@ paths:
         "404":
           $ref: "#/components/responses/NotFound"
 
+  /customers/{customerId}/performance/explanation:
+    parameters:
+      - $ref: "#/components/parameters/CustomerId"
+    get:
+      tags: [Customers]
+      summary: Explain why the portfolio value changed
+      description: >
+        Deterministic explanation of the performance series: per-holding
+        contributions, a comparison with a simple reference mix for the
+        customer's risk profile, and whether the result is inside a typical
+        range. Always includes its limitations and assumptions.
+      responses:
+        "200":
+          description: Performance explanation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PerformanceExplanation"
+        "404":
+          $ref: "#/components/responses/NotFound"
+
   /customers/{customerId}/risk:
     parameters:
       - $ref: "#/components/parameters/CustomerId"
@@ -552,6 +573,73 @@ components:
           type: number
         end_value:
           type: number
+
+    PerformanceExplanation:
+      type: object
+      description: >
+        Deterministic explanation of why the portfolio value changed. The
+        reference mixes and expected ranges are simplified educational
+        assumptions, not real benchmarks or forecasts.
+      properties:
+        customer_id:
+          type: string
+        period:
+          type: object
+          nullable: true
+          properties:
+            start_date:
+              type: string
+              format: date
+            end_date:
+              type: string
+              format: date
+            days:
+              type: integer
+        start_value:
+          type: number
+        end_value:
+          type: number
+        change_value:
+          type: number
+        return_pct:
+          type: number
+        contributions:
+          type: array
+          description: Per-holding contributions in percentage points. They add up to return_pct.
+          items:
+            type: object
+        top_positive:
+          type: array
+          items:
+            type: object
+        top_negative:
+          type: array
+          items:
+            type: object
+        by_asset_type:
+          type: array
+          items:
+            type: object
+        reference:
+          type: object
+          nullable: true
+          description: Comparison with a simple reference mix for the risk profile (market effect vs. choices effect).
+        expectation:
+          type: object
+          nullable: true
+          description: Whether the return is below, within or above a typical range for the risk profile.
+        summary:
+          type: array
+          items:
+            type: string
+        limitations:
+          type: array
+          items:
+            type: string
+        data_warnings:
+          type: array
+          items:
+            type: string
 
     RiskSummary:
       type: object

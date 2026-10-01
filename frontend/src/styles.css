@@ -444,3 +444,14 @@ body {
     overflow-x: auto;
   }
 }
+
+.contribution-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.5rem; }
+.contribution-list li { display: grid; grid-template-columns: 1fr 1fr auto; gap: 0.75rem; align-items: center; }
+.contribution-list__bar-track { background: #eef2f7; border-radius: 4px; height: 8px; overflow: hidden; }
+.contribution-list__bar { display: block; height: 100%; }
+.contribution-list__bar--positive { background: #16a34a; }
+.contribution-list__bar--negative { background: #dc2626; }
+.expectation-badge { padding: 0.15rem 0.5rem; border-radius: 999px; font-size: 0.8rem; font-weight: 600; }
+.expectation-badge--within { background: #dcfce7; color: #166534; }
+.expectation-badge--above { background: #dbeafe; color: #1e40af; }
+.expectation-badge--below { background: #fee2e2; color: #991b1b; }
