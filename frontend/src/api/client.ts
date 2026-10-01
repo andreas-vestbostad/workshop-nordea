@@ -72,7 +72,8 @@ export async function askCopilot(customerId: string, message: string): Promise<C
     body: JSON.stringify({ message }),
   })
   if (!response.ok) {
-    throw new Error(`Copilot request failed with status ${response.status}`)
+    const body = await response.json().catch(() => null) as { error?: string } | null
+    throw new Error(body?.error || `Copilot request failed with status ${response.status}`)
   }
   return (await response.json()) as CopilotReply
 }

@@ -16,7 +16,7 @@ app.listen(PORT, () => {
   console.log('All data served by this API is 100% synthetic / fictional.')
   console.log(
     process.env.ANTHROPIC_API_KEY
-      ? 'Wealth Copilot: LLM-backed answers enabled (ANTHROPIC_API_KEY set), via MCP tools.'
-      : 'Wealth Copilot: deterministic answers only. Set ANTHROPIC_API_KEY in .env to enable the LLM.',
+      ? 'Wealth Copilot: enabled (ANTHROPIC_API_KEY set), answering via Claude + MCP tools.'
+      : 'Wealth Copilot: disabled. Set ANTHROPIC_API_KEY in .env to enable POST /customers/:id/copilot.',
   )
 })

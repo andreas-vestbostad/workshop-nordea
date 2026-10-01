@@ -55,7 +55,7 @@ export default function Copilot() {
   return (
     <div className="page">
       <div className="page-heading">
-        <p className="eyebrow">Deterministic today, LLM-ready by design</p>
+        <p className="eyebrow">Powered by Claude, grounded in your real data via MCP</p>
         <h2>Wealth Copilot</h2>
       </div>
 

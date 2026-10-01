@@ -111,16 +111,26 @@ describe('GET /customers/:customerId/transactions', () => {
 })
 
 describe('POST /customers/:customerId/copilot', () => {
-  it('answers a performance question', async () => {
-    const res = await request(app)
-      .post(`/customers/${sampleCustomerId}/copilot`)
-      .send({ message: 'How has my portfolio performed?' })
-    expect(res.status).toBe(200)
-    expect(res.body.matched_intent).toBe('performance')
-  })
-
   it('rejects an empty message', async () => {
     const res = await request(app).post(`/customers/${sampleCustomerId}/copilot`).send({ message: '' })
     expect(res.status).toBe(400)
+  })
+
+  it('returns 404 for an unknown customer', async () => {
+    const res = await request(app).post('/customers/CUST-99999/copilot').send({ message: 'Hello' })
+    expect(res.status).toBe(404)
+  })
+
+  it('returns 503 when ANTHROPIC_API_KEY is not configured', async () => {
+    const originalKey = process.env.ANTHROPIC_API_KEY
+    delete process.env.ANTHROPIC_API_KEY
+    try {
+      const res = await request(app)
+        .post(`/customers/${sampleCustomerId}/copilot`)
+        .send({ message: 'How has my portfolio performed?' })
+      expect(res.status).toBe(503)
+    } finally {
+      if (originalKey) process.env.ANTHROPIC_API_KEY = originalKey
+    }
   })
 })

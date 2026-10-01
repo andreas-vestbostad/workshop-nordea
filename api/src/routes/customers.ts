@@ -3,8 +3,7 @@ import { customers, getAccountsFor, getAllHoldings, getAllInstruments, getCustom
 import { calculatePortfolio, calculatePerformance } from '../services/portfolio.js'
 import { calculateRisk } from '../services/risk.js'
 import { generateInsights } from '../services/insights.js'
-import { deterministicCopilot } from '../services/copilot.js'
-import { llmCopilot } from '../services/llmCopilot.js'
+import { answerCopilotQuestion } from '../services/copilot.js'
 
 export const customersRouter = Router()
 
@@ -87,22 +86,23 @@ customersRouter.get('/:customerId/insights', (req, res) => {
 })
 
 // POST /customers/:customerId/copilot - chat-style Q&A over the customer's
-// own data. Body: { message: string }. Uses the LLM-backed engine (Claude +
-// MCP tools, see services/llmCopilot.ts) when ANTHROPIC_API_KEY is set,
-// falling back to the deterministic rule engine otherwise or if the LLM
-// call fails, so the endpoint's contract never changes for the frontend.
+// own data. Body: { message: string }. Answered by Claude via the MCP
+// tools in /mcp-server (see services/copilot.ts). Requires
+// ANTHROPIC_API_KEY to be set.
 customersRouter.post('/:customerId/copilot', async (req, res) => {
   const customer = requireCustomer(req.params.customerId)
   if (!customer) return res.status(404).json({ error: 'Customer not found' })
   const message = typeof req.body?.message === 'string' ? req.body.message : ''
   if (!message.trim()) return res.status(400).json({ error: 'Request body must include a non-empty "message" string' })
 
-  if (process.env.ANTHROPIC_API_KEY) {
-    try {
-      return res.json(await llmCopilot.answer(customer.customer_id, message))
-    } catch (error) {
-      console.error('LLM Copilot failed, falling back to deterministic answers:', error)
-    }
+  if (!process.env.ANTHROPIC_API_KEY) {
+    return res.status(503).json({ error: 'Wealth Copilot requires ANTHROPIC_API_KEY to be set (see /.env.example).' })
   }
-  res.json(await deterministicCopilot.answer(customer.customer_id, message))
+
+  try {
+    res.json(await answerCopilotQuestion(customer.customer_id, message))
+  } catch (error) {
+    console.error('Wealth Copilot failed:', error)
+    res.status(502).json({ error: 'Wealth Copilot is temporarily unavailable. Please try again.' })
+  }
 })

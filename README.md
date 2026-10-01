@@ -9,7 +9,7 @@ Repoet inneholder et fiktivt bankmiljø med:
 - kontoer, transaksjoner, investeringer og historiske markedsdata
 - et TypeScript/Express REST API med beregnet portefølje, risiko og innsikt
 - en React/Vite-frontend med visningene Dashboard, Portefølje, Innsikter og Wealth Copilot
-- deterministiske og forklarbare Copilot-svar uten behov for ekstern AI-nøkkel
+- en Wealth Copilot drevet av Claude via MCP-verktøy, krever en `ANTHROPIC_API_KEY`
 - workshopoppgave og deltakerveiledning
 - utrulling av frontend til GitHub Pages og en Render-konfigurasjon for API-et
 
@@ -93,14 +93,12 @@ GET  /customers/:customerId/insights
 POST /customers/:customerId/copilot
 ```
 
-Copilot-endepunktet tar imot `{ "message": "Hvordan har porteføljen min utviklet seg?" }`.
-Som standard bruker det deterministisk intensjonsgjenkjenning og beregninger, uten behov for
-en ekstern AI-nøkkel. Sett `ANTHROPIC_API_KEY` i en `.env`-fil i repo-roten (se
-`.env.example`) for å slå på en LLM-drevet variant: da svarer Claude i stedet, og henter
-kundens data ved å kalle MCP-serveren i `/mcp-server` som verktøy. Feiler LLM-kallet, eller
-mangler nøkkelen, faller API-et automatisk tilbake til det deterministiske svaret - kontrakten
-mot frontend er uendret uansett motor. Se `api/src/services/copilot.ts` (deterministisk) og
-`api/src/services/llmCopilot.ts` (LLM + MCP).
+Copilot-endepunktet tar imot `{ "message": "Hvordan har porteføljen min utviklet seg?" }` og
+svares av Claude: modellen henter kundens reelle data ved å kalle MCP-serveren i
+`/mcp-server` som verktøy, og har i tillegg et innebygd nettsøk-verktøy for generell
+markedskontekst som ikke finnes i det syntetiske datasettet. Krever `ANTHROPIC_API_KEY` i en
+`.env`-fil i repo-roten (se `.env.example`) - uten den svarer endepunktet `503`. Se
+`api/src/services/copilot.ts`.
 
 ## Datamodeller i API-et
 
@@ -172,6 +170,6 @@ HTTPS-adressen og distribuerer frontend på nytt.
 - JSON-filer lastes i minnet i stedet for å bruke en database.
 - Risikoscoren er illustrativ og er ikke en egnethetsvurdering.
 - Historisk utvikling antar at dagens antall har eksistert gjennom hele perioden.
-- Copilot-svarene er deterministiske og kaller ikke en ekstern modell.
+- Copilot krever en ekte `ANTHROPIC_API_KEY` og kaller en ekstern modell (Claude) via MCP.
 - Autentisering, tilgangsstyring, samtykkehåndtering og observability på produksjonsnivå er
   dokumenterte designtemaer, men er ikke implementert her.
