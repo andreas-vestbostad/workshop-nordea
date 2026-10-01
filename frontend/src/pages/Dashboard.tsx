@@ -63,7 +63,7 @@ export default function Dashboard() {
       </div>
 
       <div className="stat-grid">
-        <StatCard label="Net worth" value={formatCurrency(netWorth)} />
+        <StatCard label="Net worth" value={formatCurrency(netWorth)} tone="hero" />
         <StatCard label="Bank deposits" value={formatCurrency(cashBalance)} />
         <StatCard label="Investments" value={formatCurrency(portfolio.total_value)} />
         <StatCard
