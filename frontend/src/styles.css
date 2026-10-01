@@ -1,5 +1,5 @@
 :root {
-  color-scheme: light dark;
+  color-scheme: light;
 
   /* Light variant, after Bulder's light palette */
   --bg: #eaeffa;
@@ -58,55 +58,55 @@
   -webkit-font-smoothing: antialiased;
 }
 
-/* Dark variant, after Bulder's default navy look */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #0f1729;
-    --surface: #1a2037;
-    --surface-muted: #262f47;
-    --surface-raised: #333e5c;
-    --surface-header: #0f1729;
-    --border: rgba(105, 152, 255, 0.14);
-    --text: #fafbff;
-    --text-muted: #9298a7;
+/* Dark variant, after Bulder's default navy look. data-theme is set in index.html and by ThemeToggle */
+:root[data-theme="dark"] {
+  color-scheme: dark;
 
-    --primary: #6998ff;
-    --primary-strong: #9bbaff;
-    --primary-soft: #262f47;
-    --primary-outline: #6998ff;
-    --accent: #fe626f;
-    --brand-fill: #0926d6;
-    --on-brand: #fafbff;
+  --bg: #0f1729;
+  --surface: #1a2037;
+  --surface-muted: #262f47;
+  --surface-raised: #333e5c;
+  --surface-header: #0f1729;
+  --border: rgba(105, 152, 255, 0.14);
+  --text: #fafbff;
+  --text-muted: #9298a7;
 
-    --positive: #5cc35c;
-    --positive-bg: #1d3a2a;
-    --positive-fg: #8fdc8f;
-    --negative: #fe626f;
-    --negative-bg: #46202a;
-    --negative-fg: #ff9aa2;
-    --warning-bg: #2f2a22;
-    --warning-accent: #e0b25c;
-    --notice-bg: #1c2650;
-    --notice-accent: #6998ff;
-    --notice-fg: #9bbaff;
-    --info-bg: #1a3030;
-    --info-accent: #5cc35c;
-    --badge-fg: #0f1729;
-    --track: #333e5c;
+  --primary: #6998ff;
+  --primary-strong: #9bbaff;
+  --primary-soft: #262f47;
+  --primary-outline: #6998ff;
+  --accent: #fe626f;
+  --brand-fill: #0926d6;
+  --on-brand: #fafbff;
 
-    --chart-1: #6998ff;
-    --chart-2: #fe626f;
-    --chart-3: #e0b25c;
-    --chart-4: #5cc35c;
-    --chart-5: #b6c8ff;
-    --chart-6: #9298a7;
-    --chart-7: #ff9aa2;
-    --chart-8: #4c5674;
+  --positive: #5cc35c;
+  --positive-bg: #1d3a2a;
+  --positive-fg: #8fdc8f;
+  --negative: #fe626f;
+  --negative-bg: #46202a;
+  --negative-fg: #ff9aa2;
+  --warning-bg: #2f2a22;
+  --warning-accent: #e0b25c;
+  --notice-bg: #1c2650;
+  --notice-accent: #6998ff;
+  --notice-fg: #9bbaff;
+  --info-bg: #1a3030;
+  --info-accent: #5cc35c;
+  --badge-fg: #0f1729;
+  --track: #333e5c;
 
-    --shadow-sm: none;
-    --shadow-md: 0 18px 36px -14px rgba(0, 0, 0, 0.5);
-    --focus-ring: 0 0 0 3px rgba(105, 152, 255, 0.45);
-  }
+  --chart-1: #6998ff;
+  --chart-2: #fe626f;
+  --chart-3: #e0b25c;
+  --chart-4: #5cc35c;
+  --chart-5: #b6c8ff;
+  --chart-6: #9298a7;
+  --chart-7: #ff9aa2;
+  --chart-8: #4c5674;
+
+  --shadow-sm: none;
+  --shadow-md: 0 18px 36px -14px rgba(0, 0, 0, 0.5);
+  --focus-ring: 0 0 0 3px rgba(105, 152, 255, 0.45);
 }
 
 * {
@@ -260,6 +260,24 @@ h4 {
   gap: 10px;
   font-size: 0.72rem;
   color: var(--text-muted);
+}
+
+.theme-toggle {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  flex: none;
+  border-radius: 999px;
+  border: 1px solid var(--primary-outline);
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.theme-toggle:hover {
+  background: var(--primary-soft);
 }
 
 /* Layout */
@@ -844,6 +862,12 @@ details summary:hover {
   .customer-selector {
     min-width: 0;
     flex: 1 1 100%;
+    order: 2;
+  }
+
+  .theme-toggle {
+    order: 1;
+    margin-left: auto;
   }
 
   .page-heading h2 {
