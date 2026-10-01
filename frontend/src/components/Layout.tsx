@@ -1,5 +1,6 @@
 import { NavLink, Outlet } from 'react-router-dom'
 import { useCustomerContext } from '../context/CustomerContext'
+import ThemeToggle from './ThemeToggle'
 
 function CustomerSelector() {
   const { customers, selectedCustomerId, setSelectedCustomerId, selectedCustomer, loading } = useCustomerContext()
@@ -48,6 +49,7 @@ export default function Layout() {
           <NavLink to="/copilot">Wealth Copilot</NavLink>
         </nav>
         <CustomerSelector />
+        <ThemeToggle />
       </header>
       <main className="app-main">
         <Outlet />

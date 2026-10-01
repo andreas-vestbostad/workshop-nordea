@@ -1,7 +1,7 @@
 import { Cell, Legend, Pie, PieChart, ResponsiveContainer, Tooltip } from 'recharts'
 import type { AllocationSlice } from '../api/types'
 
-const COLORS = ['#2563eb', '#0891b2', '#059669', '#d97706', '#dc2626', '#7c3aed', '#db2777', '#4b5563']
+const COLORS = Array.from({ length: 8 }, (_, index) => `var(--chart-${index + 1})`)
 
 export default function AllocationPieChart({ data, title }: { data: AllocationSlice[]; title: string }) {
   if (data.length === 0) {
