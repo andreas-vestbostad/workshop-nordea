@@ -4,6 +4,7 @@ import Dashboard from './pages/Dashboard'
 import Portfolio from './pages/Portfolio'
 import Insights from './pages/Insights'
 import Copilot from './pages/Copilot'
+import Advanced from './pages/Advanced'
 import { CustomerProvider } from './context/CustomerContext'
 
 // HashRouter is used (rather than BrowserRouter) so client-side routes work
@@ -17,6 +18,7 @@ export default function App() {
           <Route element={<Layout />}>
             <Route index element={<Dashboard />} />
             <Route path="portfolio" element={<Portfolio />} />
+            <Route path="portfolio/advanced" element={<Advanced />} />
             <Route path="insights" element={<Insights />} />
             <Route path="copilot" element={<Copilot />} />
           </Route>
