@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import { CartesianGrid, Line, LineChart, ReferenceLine, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
 import type { AllocationSlice, PerformancePoint } from '../api/types'
 import { GEOGRAPHY_LABELS, relevantBenchmarks } from '../data/demoBenchmarks'
@@ -85,6 +86,7 @@ export default function PerformanceChart({ series, allocationByGeography }: { se
         </LineChart>
       </ResponsiveContainer>
       <p className="benchmark-period">{formatDate(series[0].date)} – {formatDate(series[series.length - 1].date)} {series[series.length - 1].date.slice(0, 4)} · Prosentvis endring fra startdato</p>
+      <div className="advanced-link-row"><Link to="/portfolio/advanced" className="advanced-link">Avansert <span aria-hidden="true">→</span></Link><span>Alfa/beta, Sharpe, valuta og målvarsler</span></div>
       <p className="benchmark-note">Kurvene er demoreferanser beregnet fra unike fiktive aksjer og fond i hvert marked, med lik startvekt. Geografifordelingen inkluderer også kontanter og obligasjoner, mens referansene illustrerer aksjemarkeder. Kurvene er ikke historiske kurser for de navngitte indeksene. Alle kurver starter på 0 %. Porteføljen bruker dagens beholdninger gjennom hele perioden. Sammenligningen viser ikke faktisk meravkastning og tar ikke hensyn til valuta, utbytte eller handel.</p>
     </div>
   )
