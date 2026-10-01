@@ -1,104 +1,111 @@
 :root {
   color-scheme: light dark;
 
-  --bg: #f3f5f9;
-  --surface: #ffffff;
-  --surface-muted: #f7f9fc;
-  --surface-header: rgba(255, 255, 255, 0.8);
-  --border: #e3e8ef;
-  --text: #0b1324;
-  --text-muted: #5d6b82;
+  /* Light variant, after Bulder's light palette */
+  --bg: #eaeffa;
+  --surface: #fafbff;
+  --surface-muted: #dce1f3;
+  --surface-raised: #d1d7e5;
+  --surface-header: #eaeffa;
+  --border: rgba(15, 23, 41, 0.12);
+  --text: #0f1729;
+  --text-muted: #3e4965;
 
-  --primary: #1e3a8a;
-  --primary-strong: #172c6b;
-  --primary-soft: #e8eefc;
-  --accent: #0d9488;
-  --on-primary: #ffffff;
-  --gradient-brand: linear-gradient(135deg, #1e3a8a 0%, #0f766e 100%);
+  --primary: #0926d6;
+  --primary-strong: #061ba3;
+  --primary-soft: #dce1f3;
+  --primary-outline: #0926d6;
+  --accent: #bd2a37;
+  --logo: #f0525d;
+  --brand-fill: #0926d6;
+  --on-brand: #fafbff;
 
-  --positive: #047857;
-  --positive-bg: #dcfce7;
-  --positive-fg: #166534;
-  --negative: #dc2626;
-  --negative-bg: #fee2e2;
-  --negative-fg: #991b1b;
-  --warning-bg: #fff8e6;
-  --warning-accent: #d97706;
-  --notice-bg: #eef6ff;
-  --notice-accent: #2563eb;
-  --notice-fg: #1e40af;
-  --info-bg: #ecfdf5;
-  --info-accent: #059669;
-  --badge-fg: #ffffff;
-  --track: #edf1f6;
+  --positive: #266b26;
+  --positive-bg: #d7ecd5;
+  --positive-fg: #1d521d;
+  --negative: #bd2a37;
+  --negative-bg: #f8dadd;
+  --negative-fg: #8f1f29;
+  --warning-bg: #f6ecd6;
+  --warning-accent: #97732f;
+  --notice-bg: #dfe5fb;
+  --notice-accent: #0926d6;
+  --notice-fg: #061ba3;
+  --info-bg: #dcefdc;
+  --info-accent: #266b26;
+  --badge-fg: #fafbff;
+  --track: #dce1f3;
 
-  --chart-1: #2563eb;
-  --chart-2: #0d9488;
-  --chart-3: #7c3aed;
-  --chart-4: #f59e0b;
-  --chart-5: #db2777;
-  --chart-6: #0891b2;
-  --chart-7: #65a30d;
-  --chart-8: #64748b;
+  --chart-1: #0926d6;
+  --chart-2: #f0525d;
+  --chart-3: #97732f;
+  --chart-4: #266b26;
+  --chart-5: #6998ff;
+  --chart-6: #4c5674;
+  --chart-7: #b23640;
+  --chart-8: #9298a7;
 
-  --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.05), 0 1px 3px rgba(15, 23, 42, 0.04);
-  --shadow-md: 0 4px 12px rgba(15, 23, 42, 0.08), 0 2px 4px rgba(15, 23, 42, 0.04);
-  --focus-ring: 0 0 0 3px rgba(37, 99, 235, 0.35);
+  --shadow-sm: 0 1px 2px 0 rgba(15, 23, 41, 0.05), 0 12px 28px -14px rgba(15, 23, 41, 0.16);
+  --shadow-md: 0 2px 4px 0 rgba(15, 23, 41, 0.06), 0 18px 36px -14px rgba(15, 23, 41, 0.22);
+  --focus-ring: 0 0 0 3px rgba(9, 38, 214, 0.35);
 
-  --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 18px;
+  --radius-sm: 12px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
 
-  font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
-  font-feature-settings: 'cv11', 'ss01';
+  font-family: 'Figtree', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  letter-spacing: 0.01em;
   -webkit-font-smoothing: antialiased;
 }
 
+/* Dark variant, after Bulder's default navy look */
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg: #0a0f1c;
-    --surface: #121a2b;
-    --surface-muted: #172135;
-    --surface-header: rgba(18, 26, 43, 0.8);
-    --border: #243049;
-    --text: #e6ebf4;
-    --text-muted: #94a3b8;
+    --bg: #0f1729;
+    --surface: #1a2037;
+    --surface-muted: #262f47;
+    --surface-raised: #333e5c;
+    --surface-header: #0f1729;
+    --border: rgba(105, 152, 255, 0.14);
+    --text: #fafbff;
+    --text-muted: #9298a7;
 
-    --primary: #7aa2ff;
-    --primary-strong: #a5c0ff;
-    --primary-soft: #1d2a4a;
-    --accent: #2dd4bf;
-    --on-primary: #0a0f1c;
-    --gradient-brand: linear-gradient(135deg, #2541a8 0%, #0f766e 100%);
+    --primary: #6998ff;
+    --primary-strong: #9bbaff;
+    --primary-soft: #262f47;
+    --primary-outline: #6998ff;
+    --accent: #fe626f;
+    --brand-fill: #0926d6;
+    --on-brand: #fafbff;
 
-    --positive: #34d399;
-    --positive-bg: #0f3b2c;
-    --positive-fg: #6ee7b7;
-    --negative: #f87171;
-    --negative-bg: #45161a;
-    --negative-fg: #fca5a5;
-    --warning-bg: #2e2510;
-    --warning-accent: #fbbf24;
-    --notice-bg: #14223f;
-    --notice-accent: #60a5fa;
-    --notice-fg: #93c5fd;
-    --info-bg: #0f2a24;
-    --info-accent: #34d399;
-    --badge-fg: #0a0f1c;
-    --track: #1f2a40;
+    --positive: #5cc35c;
+    --positive-bg: #1d3a2a;
+    --positive-fg: #8fdc8f;
+    --negative: #fe626f;
+    --negative-bg: #46202a;
+    --negative-fg: #ff9aa2;
+    --warning-bg: #2f2a22;
+    --warning-accent: #e0b25c;
+    --notice-bg: #1c2650;
+    --notice-accent: #6998ff;
+    --notice-fg: #9bbaff;
+    --info-bg: #1a3030;
+    --info-accent: #5cc35c;
+    --badge-fg: #0f1729;
+    --track: #333e5c;
 
-    --chart-1: #60a5fa;
-    --chart-2: #2dd4bf;
-    --chart-3: #a78bfa;
-    --chart-4: #fbbf24;
-    --chart-5: #f472b6;
-    --chart-6: #22d3ee;
-    --chart-7: #a3e635;
-    --chart-8: #94a3b8;
+    --chart-1: #6998ff;
+    --chart-2: #fe626f;
+    --chart-3: #e0b25c;
+    --chart-4: #5cc35c;
+    --chart-5: #b6c8ff;
+    --chart-6: #9298a7;
+    --chart-7: #ff9aa2;
+    --chart-8: #4c5674;
 
-    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
-    --shadow-md: 0 6px 16px rgba(0, 0, 0, 0.45);
-    --focus-ring: 0 0 0 3px rgba(122, 162, 255, 0.4);
+    --shadow-sm: none;
+    --shadow-md: 0 18px 36px -14px rgba(0, 0, 0, 0.5);
+    --focus-ring: 0 0 0 3px rgba(105, 152, 255, 0.45);
   }
 }
 
@@ -110,14 +117,16 @@ body {
   margin: 0;
   background: var(--bg);
   color: var(--text);
-  line-height: 1.5;
+  font-weight: 500;
+  line-height: 1.55;
 }
 
 h1,
 h2,
 h3,
 h4 {
-  letter-spacing: -0.015em;
+  font-weight: 800;
+  letter-spacing: -0.02em;
 }
 
 :focus-visible {
@@ -135,8 +144,6 @@ h4 {
 
 .app-header {
   background: var(--surface-header);
-  backdrop-filter: saturate(180%) blur(12px);
-  -webkit-backdrop-filter: saturate(180%) blur(12px);
   box-shadow: 0 1px 0 var(--border);
   padding: 14px 32px;
   display: flex;
@@ -159,17 +166,17 @@ h4 {
   place-items: center;
   width: 38px;
   height: 38px;
-  border-radius: 11px;
-  background: var(--gradient-brand);
+  border-radius: 10px;
+  background: var(--logo);
   color: #ffffff;
   font-size: 1.1rem;
-  box-shadow: var(--shadow-md);
 }
 
 .app-header__brand h1 {
   margin: 0;
-  font-size: 1.1rem;
-  font-weight: 700;
+  font-size: 1.15rem;
+  font-weight: 900;
+  letter-spacing: 0;
 }
 
 .app-header__brand p {
@@ -188,22 +195,23 @@ h4 {
   text-decoration: none;
   color: var(--text-muted);
   padding: 8px 14px;
+  border: 1px solid transparent;
   border-radius: 999px;
   font-size: 0.88rem;
-  font-weight: 500;
+  font-weight: 600;
   white-space: nowrap;
   transition: background 0.15s ease, color 0.15s ease;
 }
 
 .app-nav a:hover {
   color: var(--text);
-  background: var(--surface-muted);
+  border-color: var(--primary-outline);
 }
 
 .app-nav a.active {
-  background: var(--primary-soft);
-  color: var(--primary);
-  font-weight: 600;
+  background: var(--brand-fill);
+  border-color: var(--brand-fill);
+  color: var(--on-brand);
 }
 
 .customer-selector {
@@ -287,9 +295,9 @@ h4 {
 
 .page-heading h2 {
   margin: 0;
-  font-size: 1.9rem;
-  font-weight: 700;
-  letter-spacing: -0.025em;
+  font-size: 2.1rem;
+  font-weight: 900;
+  letter-spacing: -0.02em;
 }
 
 /* Stat cards */
@@ -303,7 +311,6 @@ h4 {
 
 .stat-card {
   background: var(--surface);
-  border: 1px solid var(--border);
   border-radius: var(--radius-lg);
   padding: 20px;
   box-shadow: var(--shadow-sm);
@@ -328,7 +335,7 @@ h4 {
 .stat-card__value {
   margin: 0;
   font-size: clamp(1.1rem, 14cqi, 1.6rem);
-  font-weight: 700;
+  font-weight: 800;
   letter-spacing: -0.02em;
   white-space: nowrap;
   font-variant-numeric: tabular-nums;
@@ -349,7 +356,7 @@ h4 {
 }
 
 .stat-card--hero {
-  background: var(--gradient-brand);
+  background: var(--brand-fill);
   border-color: transparent;
   color: #ffffff;
   box-shadow: var(--shadow-md);
@@ -364,11 +371,16 @@ h4 {
 
 .panel {
   background: var(--surface);
-  border: 1px solid var(--border);
   border-radius: var(--radius-lg);
   padding: 24px;
   margin-bottom: 20px;
   box-shadow: var(--shadow-sm);
+}
+
+.panel .stat-card,
+.panel .chart-card {
+  background: var(--surface-muted);
+  box-shadow: none;
 }
 
 .panel--muted {
@@ -379,7 +391,7 @@ h4 {
 .panel h3 {
   margin-top: 0;
   font-size: 1.05rem;
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .chart-grid {
@@ -391,7 +403,6 @@ h4 {
 
 .chart-card {
   background: var(--surface);
-  border: 1px solid var(--border);
   border-radius: var(--radius-lg);
   padding: 20px;
   box-shadow: var(--shadow-sm);
@@ -400,7 +411,7 @@ h4 {
 .chart-card h3 {
   margin-top: 0;
   font-size: 0.95rem;
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .recharts-cartesian-axis-tick-value {
@@ -509,9 +520,7 @@ h4 {
 .insight-card {
   --insight-accent: var(--border);
   border-radius: var(--radius-md);
-  padding: 18px 18px 18px 20px;
-  border: 1px solid var(--border);
-  border-left: 4px solid var(--insight-accent);
+  padding: 20px;
   background: var(--surface);
   box-shadow: var(--shadow-sm);
 }
@@ -586,15 +595,15 @@ h4 {
 }
 
 .copilot-suggestions button {
-  background: var(--surface);
-  border: 1px solid var(--border);
+  background: transparent;
+  border: 1px solid var(--primary-outline);
   border-radius: 999px;
-  padding: 8px 14px;
+  padding: 8px 16px;
   font: inherit;
-  font-size: 0.82rem;
+  font-size: 0.84rem;
+  font-weight: 600;
   cursor: pointer;
-  color: var(--primary);
-  box-shadow: var(--shadow-sm);
+  color: var(--text);
   transition: background 0.15s ease, border-color 0.15s ease;
 }
 
@@ -610,7 +619,6 @@ h4 {
 
 .copilot-chat {
   background: var(--surface);
-  border: 1px solid var(--border);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-sm);
   display: flex;
@@ -639,7 +647,7 @@ h4 {
 
 .copilot-message--user {
   align-self: flex-end;
-  background: var(--gradient-brand);
+  background: var(--brand-fill);
   color: #ffffff;
   border-bottom-right-radius: 4px;
 }
@@ -647,7 +655,6 @@ h4 {
 .copilot-message--assistant {
   align-self: flex-start;
   background: var(--surface-muted);
-  border: 1px solid var(--border);
   color: var(--text);
   border-bottom-left-radius: 4px;
 }
@@ -682,7 +689,7 @@ h4 {
 }
 
 .copilot-chat__input button {
-  background: var(--gradient-brand);
+  background: var(--brand-fill);
   color: #ffffff;
   border: none;
   border-radius: 999px;
