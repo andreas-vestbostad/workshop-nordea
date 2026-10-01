@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { formatCurrency, formatPercentage } from '../utils/format'
+import { formatCurrency, formatPercentage, formatPoints } from '../utils/format'
 
 describe('formatCurrency', () => {
   it('rounds and formats with the default currency', () => {
@@ -19,5 +19,17 @@ describe('formatPercentage', () => {
 
   it('keeps the minus sign for negative values', () => {
     expect(formatPercentage(-3.1)).toBe('-3.1%')
+  })
+
+  it('rounds to a fixed number of decimals when asked', () => {
+    expect(formatPercentage(4.87, 1)).toBe('+4.9%')
+    expect(formatPercentage(-3.72, 1)).toBe('-3.7%')
+  })
+})
+
+describe('formatPoints', () => {
+  it('shows percentage points with one decimal and no percent sign', () => {
+    expect(formatPoints(1.94)).toBe('+1.9 pts')
+    expect(formatPoints(-2.8)).toBe('-2.8 pts')
   })
 })

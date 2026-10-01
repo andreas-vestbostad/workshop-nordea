@@ -134,3 +134,55 @@ export interface CopilotReply {
   answer: string
   matched_intent: string
 }
+
+export interface HoldingContribution {
+  ticker: string
+  name: string
+  asset_type: string
+  start_value: number
+  end_value: number
+  change_value: number
+  return_pct: number
+  contribution_pct_points: number
+}
+
+export interface GroupContribution {
+  label: string
+  change_value: number
+  contribution_pct_points: number
+}
+
+export interface ReferenceComparison {
+  label: string
+  weights: { ticker: string; weight: number }[]
+  return_pct: number
+  market_effect_pct_points: number
+  choices_effect_pct_points: number
+}
+
+export interface ExpectationCheck {
+  risk_profile: string
+  expected_return_pct: number
+  typical_low_pct: number
+  typical_high_pct: number
+  verdict: 'below' | 'within' | 'above'
+  assumption: string
+}
+
+export interface PerformanceExplanation {
+  customer_id: string
+  period: { start_date: string; end_date: string; days: number } | null
+  start_value: number
+  end_value: number
+  change_value: number
+  return_pct: number
+  contributions: HoldingContribution[]
+  top_positive: HoldingContribution[]
+  top_negative: HoldingContribution[]
+  by_asset_type: GroupContribution[]
+  reference: ReferenceComparison | null
+  expectation: ExpectationCheck | null
+  summary: string[]
+  limitations: string[]
+  data_warnings: string[]
+}

@@ -48,6 +48,10 @@ export function getPerformance(customerId: string) {
   return request(`/customers/${encodeURIComponent(customerId)}/performance`)
 }
 
+export function getPerformanceExplanation(customerId: string) {
+  return request(`/customers/${encodeURIComponent(customerId)}/performance/explanation`)
+}
+
 export function getRisk(customerId: string) {
   return request(`/customers/${encodeURIComponent(customerId)}/risk`)
 }

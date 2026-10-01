@@ -1,6 +1,7 @@
 import { Router } from 'express'
 import { customers, getAccountsFor, getAllHoldings, getAllInstruments, getCustomer, getInvestmentsFor, getTransactionsFor } from '../data.js'
 import { calculatePortfolio, calculatePerformance } from '../services/portfolio.js'
+import { explainPerformance } from '../services/performanceExplanation.js'
 import { calculateRisk } from '../services/risk.js'
 import { generateInsights } from '../services/insights.js'
 import { answerCopilotQuestion } from '../services/copilot.js'
@@ -69,6 +70,13 @@ customersRouter.get('/:customerId/performance', (req, res) => {
   const customer = requireCustomer(req.params.customerId)
   if (!customer) return res.status(404).json({ error: 'Customer not found' })
   res.json(calculatePerformance(customer.customer_id))
+})
+
+// GET /customers/:customerId/performance/explanation - why the value changed.
+customersRouter.get('/:customerId/performance/explanation', (req, res) => {
+  const customer = requireCustomer(req.params.customerId)
+  if (!customer) return res.status(404).json({ error: 'Customer not found' })
+  res.json(explainPerformance(customer.customer_id))
 })
 
 // GET /customers/:customerId/risk - illustrative demo risk score.

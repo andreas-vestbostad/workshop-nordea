@@ -2,7 +2,7 @@ interface StatCardProps {
   label: string
   value: string
   sublabel?: string
-  tone?: 'default' | 'positive' | 'negative'
+  tone?: 'default' | 'positive' | 'negative' | 'hero'
 }
 
 export default function StatCard({ label, value, sublabel, tone = 'default' }: StatCardProps) {

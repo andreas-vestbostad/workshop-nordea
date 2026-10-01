@@ -4,6 +4,7 @@ import { fetchPerformance, fetchPortfolio } from '../api/client'
 import type { PerformanceSummary, PortfolioSummary } from '../api/types'
 import AllocationPieChart from '../components/AllocationPieChart'
 import PerformanceChart from '../components/PerformanceChart'
+import PerformanceExplanationPanel from '../components/PerformanceExplanationPanel'
 import { formatCurrency } from '../utils/format'
 
 export default function Portfolio() {
@@ -46,6 +47,8 @@ export default function Portfolio() {
         <h3>Performance</h3>
         <PerformanceChart series={performance.series} />
       </section>
+
+      {selectedCustomerId && <PerformanceExplanationPanel customerId={selectedCustomerId} />}
 
       <div className="chart-grid">
         <AllocationPieChart data={portfolio.allocation_by_asset_type} title="Allocation by asset type" />
