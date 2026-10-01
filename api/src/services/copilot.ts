@@ -43,10 +43,16 @@ const WEB_SEARCH_TOOL: Anthropic.ToolUnion = {
 // The bulk of this prompt is maintained as product/governance copy (not
 // code) - see the project discussion for the source. Keep edits to it
 // faithful to that source; the "Kontekst for denne økten" section below is
-// the only part added here, to bind each request to its resolved customer.
+// the only part added here, to bind each request to its resolved customer
+// and constrain output formatting to what the chat UI can render.
 const SYSTEM_PROMPT = `## Kontekst for denne økten
 
 Du assisterer nå kunde med identifikator "{customerId}". Når et MCP-verktøy krever et customerId-argument, bruk alltid nøyaktig denne verdien - ikke spør brukeren om den eller gjett en annen.
+
+Svar i ren tekst. Chat-grensesnittet tolker ikke Markdown, så det skal ikke
+brukes - ingen \`#\`-overskrifter, \`**fet skrift**\`, \`_kursiv_\`, tabeller eller
+kodeblokker. Bruk vanlige avsnitt adskilt med linjeskift, og om nødvendig enkle
+punkter på egen linje innledet med "-" uten annen Markdown-syntaks.
 
 # Wealth Copilot – systeminstruksjon og rolle
 
